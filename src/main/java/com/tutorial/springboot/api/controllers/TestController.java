@@ -14,8 +14,8 @@ public class TestController {
     private TestService service;
 
     @PostMapping
-    public @ResponseBody TestResponse post(@RequestBody Test requestModel) {
-        Test model   = null;
+    public @ResponseBody TestResponse post(@RequestBody Test.Request requestModel) {
+        Test.Response model = null;
         String error = null;
         int status   = 200;
 
@@ -27,9 +27,9 @@ public class TestController {
         }
 
         return TestResponse.builder()
-                           .model(model)
-                           .error(error)
-                           .status(status).build();
+                   .model(model)
+                   .error(error)
+                   .status(status).build();
     }
 
 }

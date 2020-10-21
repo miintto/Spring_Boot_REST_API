@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestService {
 
-    public Test run(final Test model) {
+    public Test.Response run(final Test.Request model) {
         long id = model.getId();
-        System.out.println(id);
 
-        return Test.builder()
+        return Test.Response.builder()
                    .id(id)
                    .contents("sample contents").build();
     }
