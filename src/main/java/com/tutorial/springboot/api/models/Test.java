@@ -1,7 +1,6 @@
 package com.tutorial.springboot.api.models;
 
 import lombok.*;
-
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -21,11 +20,11 @@ public class Test {
     @NoArgsConstructor
     @Setter
     public static class Request {
-        @NotNull(message = "id is null")
+        @NotNull(message = "id cannot be null")
         private long id;
-        @NotNull(message = "startDate is null")
+        @NotNull(message = "startDate cannot be null")
         private LocalDate startDate;
-        @NotNull(message = "endDate is null")
+        @NotNull(message = "endDate cannot be null")
         private LocalDate endDate;
     }
 
