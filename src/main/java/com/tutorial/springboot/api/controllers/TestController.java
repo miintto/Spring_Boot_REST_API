@@ -4,8 +4,13 @@ import com.tutorial.springboot.api.models.Test;
 import com.tutorial.springboot.api.responses.TestResponse;
 import com.tutorial.springboot.api.services.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/test")
@@ -14,10 +19,18 @@ public class TestController {
     private TestService service;
 
     @PostMapping
-    public @ResponseBody TestResponse post(@RequestBody Test.Request requestModel) {
+    public TestResponse post(@RequestBody @Valid Test.Request requestModel, Errors errors) {
+        if (errors.hasErrors()) {
+            errors.getAllErrors();
+            return TestResponse.builder()
+                    .model(Test.Response.builder().build())
+                    .error("error")
+                    .status(500).build();
+        }
+
         Test.Response model = null;
         String error = null;
-        int status   = 200;
+        int status = 200;
 
         try {
             model = service.run(requestModel);
