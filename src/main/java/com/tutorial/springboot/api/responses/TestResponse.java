@@ -5,10 +5,10 @@ import com.tutorial.springboot.common.CommonResponse;
 import lombok.Builder;
 import java.util.List;
 
-public class TestResponse extends CommonResponse<Test.Response> {
+public class TestResponse extends CommonResponse<Test> {
 
     @Builder
-    public TestResponse(final Test.Response model, List<String> error, int status) {
+    public TestResponse(final Test model, List<String> error, int status) {
         super(model);
         this.setError(error);
         this.setStatus(status);

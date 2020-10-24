@@ -1,5 +1,6 @@
 package com.tutorial.springboot.api.controllers;
 
+import com.tutorial.springboot.api.dto.TestDto;
 import com.tutorial.springboot.api.models.Test;
 import com.tutorial.springboot.api.responses.TestResponse;
 import com.tutorial.springboot.api.services.TestService;
@@ -20,9 +21,10 @@ public class TestController {
     private TestService service;
 
     @PostMapping
-    public TestResponse post(@RequestBody @Valid Test.Request requestModel, Errors errors) {
+    public TestResponse post(@RequestBody @Valid TestDto requestModel, Errors errors) {
         List<String> error = new ArrayList<>();
-        Test.Response model = null;
+        Test model = Test.builder().id(0).contents(null).build();
+
         int status = 200;
 
         if (errors.hasErrors()) {
@@ -31,7 +33,7 @@ public class TestController {
             });
 
             return TestResponse.builder()
-                    .model(Test.Response.builder().build())
+                    .model(Test.builder().build())
                     .error(error)
                     .status(400).build();
         }
@@ -40,7 +42,7 @@ public class TestController {
             model = service.run(requestModel);
         } catch (final Exception e) {
             error.add(e.getMessage());
-            status = 500;
+            status = 400;
         }
 
         return TestResponse.builder()

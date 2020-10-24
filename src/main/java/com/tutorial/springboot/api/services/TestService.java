@@ -1,17 +1,20 @@
 package com.tutorial.springboot.api.services;
 
+import com.tutorial.springboot.api.dto.TestDto;
 import com.tutorial.springboot.api.models.Test;
+import com.tutorial.springboot.api.repository.TestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TestService {
+    @Autowired
+    private TestRepository repository;
 
-    public Test.Response run(final Test.Request model) {
+    public Test run(final TestDto model) {
         long id = model.getId();
 
-        return Test.Response.builder()
-                   .id(id)
-                   .contents("sample contents").build();
+        return repository.findById(id).orElse(null);
     }
 
 }
