@@ -1,15 +1,20 @@
 package com.tutorial.springboot.api.models;
 
 import lombok.*;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class Test {
 
+    @Entity
+    @Table(name="test")
     @Getter
     @AllArgsConstructor
     @Builder
     public static class Info {
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
         private String contents;
         private LocalDate startDate;

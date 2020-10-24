@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: local
+
+--- # local environment
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springboot
+    username: postgres
+    password: sc3256994
