@@ -24,7 +24,6 @@ public class TestController {
     public TestResponse post(@RequestBody @Valid TestDto requestModel, Errors errors) {
         List<String> error = new ArrayList<>();
         Test model = Test.builder().id(0).contents(null).build();
-
         int status = 200;
 
         if (errors.hasErrors()) {
